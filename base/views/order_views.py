@@ -61,10 +61,22 @@ class StripeCheckoutView(APIView):
 @permission_classes([IsAdminUser])
 def getBlockchain(request):
     try:
-        orders = Order.objects.filter(isPaid = True, totalPrice__gte = 100)
+        orders = Order.objects.filter(isPaid = True, totalPrice__gte = 100, walletAddress__isnull = False, isTokenize = False)
         
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data)
+    except Exception as e:
+        print(e)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateIsTokenize(request, pk):
+    try:
+        order = Order.objects.get(_id = pk)
+        order.isTokenize = True
+        order.save()
+        return Response({"message": "Success"})
     except Exception as e:
         print(e)
 
@@ -77,6 +89,9 @@ def test_payment(request):
         payment_method_types=['card'],
         receipt_email='test@example.com')
     return Response(status=status.HTTP_200_OK, data=test_payment_intent)
+
+
+
 
 
 API_URL="http://127.0.0.1:8000"
@@ -141,7 +156,8 @@ def addOrderItems(request):
             paymentMethod = data['paymentMethod'],
             taxPrice = data['taxPrice'],
             shippingPrice = data['shippingPrice'],
-            totalPrice = data['totalPrice']
+            totalPrice = data['totalPrice'],
+            walletAddress = data["walletAddress"]
         )
 
         shipping = ShippingAddress.objects.create(
@@ -149,7 +165,8 @@ def addOrderItems(request):
             address = data['shippingAddress']['address'],
             city = data['shippingAddress']['city'],
             postalCode = data['shippingAddress']['postalCode'],
-            country = data['shippingAddress']['country']
+            country = data['shippingAddress']['country'],
+            walletAddress = data["walletAddress"]
         )
 
         for i in orderItems:

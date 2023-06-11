@@ -103,13 +103,22 @@ function ShippingScreen() {
 
         <Form.Group controlId="country">
           <Form.Label>Wallet Adress</Form.Label>
-          <Button
-            variant="primary"
-            style={{ display: "block", marginBottom: "10px" }}
-            onClick={handleClick}
-          >
-            Connect Wallet
-          </Button>
+          {walletAddress ? (
+            <Button
+              variant="primary"
+              style={{ display: "block", marginBottom: "10px" }}
+            >
+              Metamask Connected!!!
+            </Button>
+          ) : (
+            <Button
+              variant="primary"
+              style={{ display: "block", marginBottom: "10px" }}
+              onClick={handleClick}
+            >
+              Connect Wallet
+            </Button>
+          )}
         </Form.Group>
         {/* <div
           style={{

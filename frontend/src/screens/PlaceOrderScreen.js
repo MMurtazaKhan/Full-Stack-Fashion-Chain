@@ -46,10 +46,11 @@ function PlaceOrderScreen({ history }) {
             shippingPrice: cart.shippingPrice,
             taxPrice: cart.taxPrice,
             totalPrice: cart.totalPrice,
+            walletAddress: walletAddress
         }))
 
-        axios.put(`http://127.0.0.1:8000/api/orders/wallet/${order._id}/${walletAddress}`)
-        console.log("address", walletAddress)
+        console.log("my address", walletAddress)
+
     }
 
     return (

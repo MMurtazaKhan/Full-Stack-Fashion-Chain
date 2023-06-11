@@ -54,6 +54,7 @@ class Order(models.Model):
         auto_now_add=False, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     walletAddress = models.CharField(max_length=200,null=True)
+    isTokenize = models.BooleanField(default = False)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
