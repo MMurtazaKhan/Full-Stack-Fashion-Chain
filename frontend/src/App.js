@@ -20,6 +20,8 @@ import OrderListScreen from "./screens/OrderListScreen";
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from "@stripe/stripe-js/pure";
 import CheckoutForm from "./screens/CheckoutForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
       <Header />
       <main className="py-3" >
       <Container>
+      <ToastContainer position="top-center" autoClose={3000} />
     <Routes>
         <Route path="/" exact element={<HomeScreen/>} />
         <Route path="/login" exact element={<LoginScreen/>} />

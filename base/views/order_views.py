@@ -58,7 +58,7 @@ class StripeCheckoutView(APIView):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def getBlockchain(request):
     try:
         orders = Order.objects.filter(isPaid = True, totalPrice__gte = 100, walletAddress__isnull = False, isTokenize = False)
