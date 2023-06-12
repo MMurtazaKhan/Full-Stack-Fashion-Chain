@@ -54,8 +54,10 @@ function OrderListScreen() {
             toast.error("Metamask not connected!")
             console.log("toasr")
         }
-        
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        else{
+
+        try{
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const contract = new ethers.Contract(
         FashionChain.address,
@@ -74,6 +76,12 @@ function OrderListScreen() {
         } else {
         toast.error("Transaction Failed");
         }
+        }
+        catch(e){
+            toast.error("Error occurred")
+        }
+        
+    }
   };
     
 

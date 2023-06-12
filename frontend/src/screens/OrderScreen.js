@@ -208,8 +208,8 @@ function OrderScreen() {
 				method='POST'
                 onSuccess={successPaymentHandler}
 			>
-				<button className='button' type='submit'>
-					Checkout
+				<button className='button' type='submit' style={{height: "35px", width:"350px", color: "white", borderRadius: "10px", backgroundColor: "blue"}}>
+					Pay with Stripe
 				</button>
 			</form>
         </Col>

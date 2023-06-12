@@ -70,7 +70,7 @@ def getBlockchain(request):
 
 
 @api_view(['PUT'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def updateIsTokenize(request, pk):
     try:
         order = Order.objects.get(_id = pk)
@@ -168,6 +168,7 @@ def addOrderItems(request):
             country = data['shippingAddress']['country'],
             walletAddress = data["walletAddress"]
         )
+
 
         for i in orderItems:
             product = Product.objects.get(_id = i['product'])
