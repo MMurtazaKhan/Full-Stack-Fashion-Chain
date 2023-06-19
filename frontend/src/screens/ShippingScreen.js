@@ -8,11 +8,12 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { useEffect } from "react";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
+import FashionChain from "../contracts/FashionChain.json";
 
 function ShippingScreen() {
   const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
-
+  const { shippingAddress, cartItems } = cart;
+  const totalPrice = cartItems.reduce((acc, item)=> acc + item.qty * item.price, 0)
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -29,22 +30,57 @@ function ShippingScreen() {
     navigate("/payment");
   };
 
-  const handleClick = async () => {
-    if (typeof window.ethereum == "undefined") {
-      toast.error("Metamask is not installed!!!");
-    } else {
-      try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        console.log("Connected account:", accounts[0]);
-        setWalletAdress(accounts[0]);
-      } catch (err) {
-        console.log(err);
-      }
+  // Function to connect the wallet
+const connectWallet = async () => {
+  if (typeof window.ethereum == "undefined") {
+    toast.error("Metamask is not installed!!!");
+  } else {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      console.log("Connected account:", accounts[0]);
+      setWalletAdress(accounts[0]);
+      return provider; // Return the provider for further use
+    } catch (err) {
+      console.log(err);
     }
-  };
+  }
+};
+
+// Function to call the smart contract function
+const callContractFunction = async (provider) => {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      FashionChain.address,
+      FashionChain.abi,
+      signer
+    );
+
+    const filePrice = ethers.utils.parseEther("0.0001");
+    const walletAddress = await signer.getAddress();
+    setWalletAdress(walletAddress); // Set the wallet address to the state variable
+
+    const tx = await contract.takeFundsForToken({
+      from: walletAddress,
+      value: filePrice._hex,
+    });
+
+    await tx.wait();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Function to connect the wallet and then call the smart contract function
+const handleClick = async () => {
+  const provider = await connectWallet();
+  if (provider) {
+    callContractFunction(provider);
+  }
+};
 
   useEffect(() => {
     console.log("shipping screen", walletAddress);
@@ -103,22 +139,27 @@ function ShippingScreen() {
 
         <Form.Group controlId="country">
           <Form.Label>Wallet Adress</Form.Label>
-          {walletAddress ? (
-            <Button
-              variant="primary"
-              style={{ display: "block", marginBottom: "10px" }}
-            >
-              Metamask Connected!!!
-            </Button>
-          ) : (
-            <Button
-              variant="primary"
-              style={{ display: "block", marginBottom: "10px" }}
-              onClick={handleClick}
-            >
-              Connect Wallet
-            </Button>
-          )}
+          {totalPrice >= 100 ? (
+  walletAddress ? (
+    <Button
+      variant="primary"
+      style={{ display: "block", marginBottom: "10px" }}
+    >
+      Metamask Connected!!!
+    </Button>
+  ) : (
+    <Button
+      variant="primary"
+      style={{ display: "block", marginBottom: "10px" }}
+      onClick={handleClick}
+    >
+      Connect Wallet
+    </Button>
+  )
+) : (
+  <p>.</p>
+)}
+
         </Form.Group>
         {/* <div
           style={{

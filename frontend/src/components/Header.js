@@ -39,9 +39,6 @@ function Header() {
                 <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to='/stripe'>
-                    <NavDropdown.Item>Stripe</NavDropdown.Item>
-                </LinkContainer>
 
                 <NavDropdown.Item  onClick={logoutHandler} >Log Out</NavDropdown.Item>
                 </NavDropdown>

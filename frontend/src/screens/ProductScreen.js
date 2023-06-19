@@ -74,7 +74,7 @@ function ProductScreen() {
             <div>
                 <Row>
                 <Col md={6}>
-                    <Image src={`https://murtaza10dec.pythonanywhere.com/${product.image}`} alt={product.name} fluid/>
+                    <Image src={product.image} alt={product.name} fluid/>
                 </Col>
     
                 <Col md={3} >

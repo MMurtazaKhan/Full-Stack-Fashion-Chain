@@ -23,7 +23,9 @@ function CartScreen() {
   console.log('Cart Items: ', cartItems)
 
   const removeFromCartHandler = (id) => {
+    if(window.confirm('Are you sure you want to remove this product from cart?')){
     dispatch(removeFromCart(id))
+    }
   }
 
   const checkoutHandler = () =>{

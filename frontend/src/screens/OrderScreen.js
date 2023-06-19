@@ -203,6 +203,7 @@ function OrderScreen() {
                 }
 
             </Card>
+            {!order.isPaid && (
             <form
 				action={`http://localhost:3000/api/orders/create-checkout-session/${id}`}
 				method='POST'
@@ -211,7 +212,7 @@ function OrderScreen() {
 				<button className='button' type='submit' style={{height: "35px", width:"350px", color: "white", borderRadius: "10px", backgroundColor: "blue"}}>
 					Pay with Stripe
 				</button>
-			</form>
+			</form>)}
         </Col>
     </Row>
     </div>
