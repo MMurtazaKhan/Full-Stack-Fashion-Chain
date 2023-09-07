@@ -12,7 +12,7 @@ export const listProducts = (keyword ='') => async (dispatch) => {
         dispatch({type: PRODUCT_LIST_REQUEST})
 
         // const {data} = await axios.get('/api/products/')
-        const {data} = await axios.get(`/api/products${keyword}`)
+        const {data} = await axios.get(`https://murtaza10dec.pythonanywhere.com/api/products${keyword}`)
 
         dispatch({type: PRODUCT_LIST_SUCCESS, payload: data})
 
@@ -30,7 +30,7 @@ export const topRatedProducts = () => async (dispatch) => {
 
         dispatch({type: PRODUCT_TOP_REQUEST})
 
-        const {data} = await axios.get(`/api/products/top`)
+        const {data} = await axios.get(`https://murtaza10dec.pythonanywhere.com/api/products/top`)
 
         dispatch({type: PRODUCT_TOP_SUCCESS, payload: data})
 
@@ -48,7 +48,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     try{
         dispatch({type: PRODUCT_DETAILS_REQUEST})
 
-        const {data} = await axios.get(`/api/products/${id}`)
+        const {data} = await axios.get(`https://murtaza10dec.pythonanywhere.com/api/products/${id}`)
 
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: data})
     }
@@ -81,7 +81,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.delete(`/api/products/delete/${id}`,
+        const {data} = await axios.delete(`https://murtaza10dec.pythonanywhere.com/api/products/delete/${id}`,
                         config
         
         )
@@ -120,7 +120,7 @@ export const createProduct = () => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.post(`/api/products/create/`,
+        const {data} = await axios.post(`https://murtaza10dec.pythonanywhere.com/api/products/create/`,
                         {},
                         config
         
@@ -160,7 +160,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.put(`/api/products/update/${product._id}/`,
+        const {data} = await axios.put(`https://murtaza10dec.pythonanywhere.com/api/products/update/${product._id}/`,
                         product,
                         config
         
@@ -200,7 +200,7 @@ export const createProductReview = (id, review) => async (dispatch, getState) =>
             }
         }
 
-        const {data} = await axios.post(`/api/products/${id}/reviews/`,
+        const {data} = await axios.post(`https://murtaza10dec.pythonanywhere.com/api/products/${id}/reviews/`,
                         review,
                         config
         

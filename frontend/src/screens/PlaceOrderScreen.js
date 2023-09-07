@@ -31,13 +31,14 @@ function PlaceOrderScreen({ history }) {
         navigate('/payment')
     }
 
+  
     useEffect(() => {
         if (success) {
             navigate(`/order/${order._id}`)
             dispatch({ type: ORDER_CREATE_RESET })
         }
-    }, [success, history])
-
+    }, [success, navigate])
+    
     const placeOrder = () => {
         dispatch(createOrder({
             orderItems: cart.cartItems,
@@ -50,9 +51,13 @@ function PlaceOrderScreen({ history }) {
             walletAddress: walletAddress
         }))
 
+        navigate(`/order/${order._id}`)
+
         console.log("my address", walletAddress)
 
     }
+
+  
 
     return (
         <div>

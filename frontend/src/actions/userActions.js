@@ -51,7 +51,7 @@ export const login = (email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            '/api/users/login/',
+            'https://murtaza10dec.pythonanywhere.com/api/users/login/',
             {'username': email, 'password': password},
             config
         )
@@ -97,7 +97,7 @@ export const register = (name, email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            '/api/users/register/',
+            'https://murtaza10dec.pythonanywhere.com/api/users/register/',
             {'name':name, 'email': email, 'password':password},
             config
             )
@@ -144,7 +144,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `/api/users/${id}/`,
+            `https://murtaza10dec.pythonanywhere.com/api/users/${id}/`,
             config
             )
         
@@ -184,7 +184,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/users/profile/update/`,
+            `https://murtaza10dec.pythonanywhere.com/api/users/profile/update/`,
             user,
             config
         )
@@ -229,7 +229,7 @@ export const listUsers = () => async (dispatch, getState) => {
         }
 
         const { data } = await axios.get(
-            `/api/users/`,
+            `https://murtaza10dec.pythonanywhere.com/api/users/`,
             config
         )
 
@@ -267,7 +267,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.delete(
-            `/api/users/delete/${id}`,
+            `https://murtaza10dec.pythonanywhere.com/api/users/delete/${id}`,
             config
         )
 
@@ -305,7 +305,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/users/update/${user._id}`,
+            `https://murtaza10dec.pythonanywhere.com/api/users/update/${user._id}`,
             user,
             config
         )

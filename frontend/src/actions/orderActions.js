@@ -25,7 +25,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.post('/api/orders/add/',
+        const {data} = await axios.post('https://murtaza10dec.pythonanywhere.com/api/orders/add/',
                         order,
                         config
         
@@ -71,7 +71,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get(`/api/orders/${id}/`,
+        const {data} = await axios.get(`https://murtaza10dec.pythonanywhere.com/api/orders/${id}/`,
                         config
         
         )
@@ -109,7 +109,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.put(`/api/orders/${id}/pay/`,
+        const {data} = await axios.put(`https://murtaza10dec.pythonanywhere.com/api/orders/${id}/pay/`,
                         paymentResult,
                         config
         
@@ -148,7 +148,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.put(`/api/orders/${order._id}/deliver/`,
+        const {data} = await axios.put(`https://murtaza10dec.pythonanywhere.com/api/orders/${order._id}/deliver/`,
                         {},
                         config
         
@@ -187,7 +187,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get(`/api/orders/myorders/`,
+        const {data} = await axios.get(`https://murtaza10dec.pythonanywhere.com/api/orders/myorders/`,
                         config
         
         )
@@ -225,7 +225,7 @@ export const listOrders = () => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get(`/api/orders/`,
+        const {data} = await axios.get(`https://murtaza10dec.pythonanywhere.com/api/orders/`,
                         config
         
         )
